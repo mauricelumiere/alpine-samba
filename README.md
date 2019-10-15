@@ -87,12 +87,11 @@ Add/update the `-v` volumes below to match the shares defiend in your
 ```
 docker run -dt \
   -v $PWD/smb.conf:/etc/samba/smb.conf \
-  -v $PWD/dozer:/dozer \
-  -v $PWD/share:/share \
+  -v /opt:/mount/opt \
   -p 445:445 \
   --name samba \
   --restart=always \
-  stanback/alpine-samba
+  rp3-samba
 ```
 
 You can replace `-p 445:445` with `--net=host` above if you want to use your
@@ -105,8 +104,8 @@ options.
 Once the server is running, you can add your users using the following:
 
 ```
-docker exec -it samba adduser -s /sbin/nologin -h /home/samba -H -D carol
-docker exec -it samba smbpasswd -a carol
+docker exec -it samba adduser -s /sbin/nologin -h /home/samba -H -D niclas
+docker exec -it samba smbpasswd -a niclas
 ```
 
 ## Check Status
